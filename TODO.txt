@@ -1,0 +1,12 @@
+=== 0.1 ===
+- CLI parsing include arguments and options
+- colours
+- description
+- arguments parsing (./tasks.js mytask arg1 arg2 => function(arg1, arg2))
+- options parsing
+
+=== 0.2 ===
+- define without callback, just with dependencies
+- aliases (-H or --help, -T or --tasks)
+- what if user redefine a task (add dependencies, but what with a block?)
+- specs

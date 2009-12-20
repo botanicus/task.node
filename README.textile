@@ -1,0 +1,49 @@
+h1. About Task.node
+
+Task.node is a simple task manager for Node.js similar to Make, Rake, Scons or others.
+
+h1. Features
+
+Each task can have *dependencies* which are tasks which will be executed before this task is invoked. Example: @task.define("release:tag", ["release:push"])@
+
+For easier interaction with user tasks can also have a *description* and since task name is just a string, you can define tasks like @-L@ or @--list@ etc.
+
+You can namespace your tasks by @namespace:task@, i. e. @db:migrate@. There is no additional support for namespaces, there is just convetion that namespaces are separated by a colon.
+
+h1. CLI Execution
+
+The first argument is always name of the task which will be executed. If no task is specified, then task called @default@ will be executed. Each task can have positional and named arguments.
+
+h2. Positional Arguments
+
+Every arguments except the first one and arguments which start with @--@ are considered as positional arguments and will be used as arguments for the task.
+
+So if we want to have something like @./taskfile.js spec spec/task@ then we have to define task @task.define("spec", function(path) { sh("jspec " + path) } )@ 
+
+h2. Named Arguments
+
+- @--no-git@ or @--without-git@ {"git": false}
+- @--git@ or @--with-git@ {"git": true}
+- @--path=spec/task@ {"path": "spec/task"}
+
+./taskfile.js clean:whitespace lib src --indentation="  "
+
+<pre>
+task.define("clean:whitespace", function(paths) {
+	var indentation = this.options.indentation || "  "
+	// normalize whitespace
+})
+</pre>
+
+./taskfile.js taskname arg1 arg2 options
+function(arg1, arg2, options) {
+	options.path // "spec/task"
+}
+
+h1. Built-in Tasks
+
+Currently there are two built-in tasks: @-T@ for list of all available tasks with its descriptions and dependencies and @-H@ for a general help.
+
+h1. Examples
+
+Take a look at "examples/tasks.js":http://github.com/botanicus/task.node/tree/master/examples/tasks.js
