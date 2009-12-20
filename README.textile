@@ -30,14 +30,14 @@ h2. Named Arguments
 
 <pre>
 task.define("clean:whitespace", function(paths) {
-	var indentation = this.options.indentation || "  "
-	// normalize whitespace
+  var indentation = this.options.indentation || "  "
+  // normalize whitespace
 })
 </pre>
 
 ./taskfile.js taskname arg1 arg2 options
 function(arg1, arg2, options) {
-	options.path // "spec/task"
+  options.path // "spec/task"
 }
 
 h1. Built-in Tasks
