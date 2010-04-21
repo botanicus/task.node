@@ -55,9 +55,6 @@ exports.exec = function(task, args) {
 }
 
 exports.run = function () {
-  if (process.cwd() != __filename.replace(/\\/g,'/').replace(/\/[^\/]*$/, '')) {
-    throw("You have to run it from current directory!")
-  }
   var argv = process.ARGV
   var args = argv.slice(2, argv.length)
   var task = args.shift() || "default"
